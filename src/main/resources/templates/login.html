@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Home</title>
+<link rel="stylesheet" type="text/css" media="all"
+href="../static/css/index.css" th:href="@{/css/index.css}"/>
+<script src="../static/javascript/display.js" th:src="@{/javascript/display.js}"></script>
+</head>
+<body>
+<h1>SHERIDAN MEETS</h1>
+<div id='img-bg'></div>
+<div id="h2-container"><div id="h2-bg"></div><h2>Are you a Sheridan College student that is
+looking for short-term dating, new friends, or your future life partner? 
+Well, you came to the right place!</h2></div>
+<button type="button" id="log" class="button" onclick="display('login');">LOGIN</button><br>
+<div id="login">
+	<div id="login-bg"></div>
+	<form th:action="@{/login}" method="POST">
+		<div th:if="${param.error}">
+			<div class="alert">
+			Invalid username or password.
+			</div>
+		</div>
+		<div th:if="${param.logout}">
+			<div class="alert">
+			You have been logged out.
+			</div>
+		</div>
+		<div>
+			<label for="username">User Name:</label>	
+			<input type="text" name="username" id="username" 
+			autofocus="autofocus" placeholder="User name"/><br>
+		</div>
+		<div>
+			<label for="password">Password:</label>	
+			<input type="password" name="password" id="password" 
+			 placeholder="Password"/><br>
+		</div>
+		<div>
+			<input type="submit" id="login-submit" name="login-submit"
+				value="LOGIN">
+		</div>
+	</form>
+</div>
+<button type="button" id="reg" class="button" onclick="display('register');">REGISTER</button>
+<div id="register">
+	<div id="register-bg"></div>
+	<form action="#" th:action="@{/register}" method="POST" enctype="multipart/form-data" 
+			th:object="${user}" id="register-form">
+		<input type="hidden" name="role" value="user">
+		<p id="invalid">Username Already Exists</p>
+		<span>Username:</span> <input type="text" th:field="*{userName}" id="un" 
+			pattern="[A-Za-z0-9-]+" required><br>
+		<span>First Name:</span> <input type="text" th:field="*{firstName}" required><br>
+		<span>Password:</span> <input type="password" name="password" required><br>
+		<span>Age:</span><input type="number" th:field="*{age}" min="18" max="100" placeholder="18" 
+					required><br>
+		<span>Ethnicity:</span> <select th:field="*{ethnicity}">
+  					<option th:each="e:*{ethnicities}" th:value="${e}" th:text="${e}"/>
+				</select><br>
+		<span>Gender:</span> <select th:field="*{gender}">
+  					<option th:each="g:*{genders}" th:value="${g}" th:text="${g}"/>
+				</select><br>
+		<span>Campus:</span> <select th:field="*{campus}">
+  					<option th:each="c:*{campuses}" th:value="${c}" th:text="${c}"/>
+				</select><br>
+		<span>Program:</span> <select th:field="*{program}">
+  					<option th:each="p:*{programs}" th:value="${p}" th:text="${p}"/>
+				</select><br>
+		<span>Bio:</span><br><textarea maxLength="150" name="bio" style="resize: none;"></textarea><br>
+		<span>Interested In:</span> <select th:field="*{interestedIn}">
+  					<option th:each="i:*{interests}" th:value="${i}" th:text="${i}"/>
+				</select><br>
+		<span>Show Me:</span> <select th:field="*{showMe}">
+  					<option th:each="s:*{shows}" th:value="${s}" th:text="${s}"/>
+				</select><br>
+		<span>Profile Picture:</span> <input type="file" th:field="*{pic}"  
+							accept="image/*" required><br>
+		<button type="button" th:onclick="checkUserName('/checkUserName/')">Register</button>
+		<input type="submit" id="submit-btn" style="display:none">
+    </form>
+ </div>
+</body>
+</html>

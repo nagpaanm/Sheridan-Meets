@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" media="all" 
+	href="../static/fragment.css"
+	th:href="@{/fragment.css}"/>
+</head>
+<body>
+<h1 th:fragment="h1">
+	<h1>Denny's Drinks</h1>
+</h1>
+
+<div th:fragment="formField (field, type, value, size)">
+	<div>
+		<label th:for="${#strings.toLowerCase(field)}"> <span
+			th:text="${field}">Field</span>
+		</label>
+	</div>
+	<div>
+		<input th:type="${type}" th:id="${#strings.toLowerCase(field)}"
+			th:name="${#strings.toLowerCase(field)}" th:value="${value}"
+			th:size="${size}">
+	</div>
+</div>
+
+<footer th:fragment="footer">
+	<a href="www.google.com">All Rights Reserved - 2019</a>
+	<a href="www.google.com">Thank Our Partners In Crime</a>
+	<a href="www.google.com">Donate Now</a>
+</footer>
+</body>
+</html>

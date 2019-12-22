@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Profile</title>
+<link rel="stylesheet" type="text/css" media="all"
+href="../static/css/profile.css" th:href="@{/css/profile.css}"/>
+<script src="../static/javascript/display.js" th:src="@{/javascript/display.js}"></script>
+</head>
+<body>
+<div id="h1-container">
+	<div id="h1-bg"></div>
+	<h1>SHERIDAN MEETS</h1>
+</div>
+
+<div id='img-bg'></div>
+<ul>
+	<div id="ul-bg"></div>
+	<li id="like-li"><p th:text="'Likes: ' + ${user.likes}"></p>
+		<ul id="like-list">
+			<li th:each="l : ${likes}" >
+				<p th:text="'+ ' + ${l.firstName} + ' Likes You'"></p>
+			</li>
+		</ul>
+	</li>
+	<li><a th:href="@{/sm/matches}" th:text="'Matches: ' + ${user.matches}"></a></li>
+	<li id="highlighted"><div></div><a th:href="@{/sm/profile}">My Profile</a></li>
+	<li><a th:href="@{/sm/settings}" th:text="Settings"></a></li>
+	<li><a th:href="@{/logout}">Logout</a></li>
+</ul>
+<div id="contain">
+	<h2>This Is How You Will Appear To Others</h2>
+	<button type="button" id="edit" onclick="display('form-edit');">EDIT</button>
+	<form th:action="@{/sm/profile/edit}" method="POST" th:object="${user}" enctype="multipart/form-data" 
+				id="form-edit">
+		<input type="hidden" name="username" th:field="*{userName}">
+		<span>First Name:</span> <input type="text" th:field="*{firstName}"
+			th:value="${user.firstName}" required><br>
+		<span>Age:</span><input type="number" th:field="*{age}" min="18" max="100" 
+			placeholder="18" th:value="${user.age}" required><br>
+		<span>Ethnicity:</span> <select th:field="*{ethnicity}" th:value="${user.ethnicity}">
+  					<option th:each="e:*{ethnicities}" th:value="${e}" th:text="${e}"/>
+				</select><br>
+		<span>Campus:</span> <select th:field="*{campus}" th:value="${user.campus}">
+  					<option th:each="c:*{campuses}" th:value="${c}" th:text="${c}"/>
+				</select><br>
+		<span>Program:</span> <select th:field="*{program}" th:value="${user.program}">
+  					<option th:each="p:*{programs}" th:value="${p}" th:text="${p}"/>
+				</select><br>
+		<span>Bio:</span><br><textarea maxLength="150" name="bio" 
+			style="resize: none;" th:text="${user.bio}"></textarea><br>
+		<span>Interested In:</span> <select th:field="*{interestedIn}" th:value="${user.interestedIn}">
+  					<option th:each="i:*{interests}" th:value="${i}" th:text="${i}"/>
+				</select><br>
+		<span>Profile Picture:</span> <input type="file" th:field="*{pic}"  
+					accept="image/*"><br>
+		<input type="submit" value="UPDATE">
+	</form>
+</div>
+
+<div id="filter">
+	<h2>Your Search Options Have Been Saved</h2>
+	<button type="button" id="modify" onclick="display('modify-edit');">Modify</button>
+	<form th:action="@{/sm/profile/filter}" method="POST" th:object="${user}" id="modify-edit">
+			<input type="hidden" name="username" th:field="*{userName}">
+				<span>Campus Search: </span> <select th:field="*{campusSearch}">
+  					<option th:each="c:*{campuses}" th:value="${c}" th:text="${c}"/>
+  					<option th:value="All" th:text="All"/>
+				</select><br>
+				<span>Program Search:</span> <select th:field="*{programSearch}">
+  					<option th:each="p:*{programs}" th:value="${p}" th:text="${p}"/>
+  					<option th:value="All" th:text="All"/>
+				</select><br>
+				<span>Ethnicity Search:</span> <select th:field="*{ethnicitySearch}">
+  					<option th:each="e:*{ethnicities}" th:value="${e}" th:text="${e}"/>
+  					<option th:value="All" th:text="All"/>
+				</select><br>
+				<span>Searching For:</span> <select th:field="*{interestedInSearch}">
+  					<option th:each="i:*{interests}" th:value="${i}" th:text="${i}"/>
+  					<option th:value="All" th:text="All"/>
+				</select><br>
+				<span>Show Me:</span> <select th:field="*{showMeSearch}">
+  					<option th:each="s:*{shows}" th:value="${s}" th:text="${s}"/>
+				</select><br>
+			<input type="submit" value="UPDATE">
+	</form>
+</div>
+<div id="container">
+	<div id="container-bg"></div>
+	<p th:text="${user.firstName}" id="name-age"></p>
+	<div id="img"> 
+		<img th:src="@{'data:image/jpg;charset=utf-8;base64,'+${user.encoded}}"/>
+	</div>
+	<div id="paras">
+		<p th:text="${user.ethnicity} + ', ' + ${user.age} + ', ' + ${user.campus}" id="ethnicity"></p>
+		<p th:text="${user.program}" id="campus"></p>
+		<p th:text="${user.interestedIn}" id="interested-in"></p>
+		<p th:text="${user.bio}" id="bio"></p>
+	</div>
+</div>
+<form action="/sm/meet" method="GET" id="proceed">
+	<input type="submit" value="PROCEED">
+</form>
+<form action="/logout" method="GET" id="logout">
+	<input type="submit" value="LOGOUT">
+</form>
+</body>
+</html>

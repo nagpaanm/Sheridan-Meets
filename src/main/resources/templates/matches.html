@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Matches</title>
+<link rel="stylesheet" type="text/css" media="all"
+href="../static/css/meet.css" th:href="@{/css/meet.css}"/>
+</head>
+<body>
+<div id="h1-container">
+	<div id="h1-bg"></div>
+	<h1>SHERIDAN MEETS</h1>
+</div>
+
+<div id='img-bg'></div>
+<ul>
+	<div id="ul-bg"></div>
+	<li id="like-li"><p th:text="'Likes: ' + ${user.likes}"></p>
+		<ul id="like-list">
+			<li th:each="l : ${likes}" >
+				<p th:text="'+ ' + ${l.firstName} + ' Likes You'"></p>
+			</li>
+		</ul>
+	</li>
+	<li id="highlighted"><div></div><a th:href="@{/sm/matches}" th:text="'Matches: ' + ${user.matches}"></a></li>
+	<li><a th:href="@{/sm/profile}">My Profile</a></li>
+	<li><a th:href="@{/sm/settings}" th:text="Settings"></a></li>
+	<li><a th:href="@{/logout}">Logout</a></li>
+</ul>
+<h2 id="topic" th:text="'You have ' + ${user.matches} + ' matches!'"></h2>
+<ul id="matchList">
+	<li th:each="m : ${matches}" >
+		<div>
+			<form action="/sm/matches/messaging" method="POST">
+				<h3 th:text="${m.firstName}"></h3>
+				<input type="hidden" name="username" th:value="${m.userName}">
+				<input type="hidden" name="message" th:value=null>
+				<input type="submit" id="m-submit">
+				<img th:src="@{'data:image/jpg;charset=utf-8;base64,'+${m.encoded}}" class="imgs">
+			</form>
+		</div>
+	</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Messaging</title>
+<link rel="stylesheet" type="text/css" media="all"
+href="../static/css/messaging.css" th:href="@{/css/messaging.css}"/>
+</head>
+<body onload="document.getElementById('msgContainer').scrollTop = document.getElementById('msgContainer').scrollHeight;">
+<div id="h1-container">
+	<div id="h1-bg"></div>
+	<h1>SHERIDAN MEETS</h1>
+</div>
+<div id='img-bg'></div>
+<ul>
+	<div id="ul-bg"></div>
+	<li id="like-li"><p th:text="'Likes: ' + ${user.likes}"></p>
+		<ul id="like-list">
+			<li th:each="l : ${likes}" >
+				<p th:text="'+ ' + ${l.firstName} + ' Likes You'"></p>
+			</li>
+		</ul>
+	</li>
+	<li><a th:href="@{/sm/matches}" th:text="'Matches: ' + ${user.matches}"></a></li>
+	<li><a th:href="@{/sm/profile}">My Profile</a></li>
+	<li><a th:href="@{/sm/settings}" th:text="Settings"></a></li>
+	<li><a th:href="@{/logout}">Logout</a></li>
+</ul>
+<div id="container" class="align">
+	<p th:text="${match.firstName}" id="name-age"></p>
+	<div id="img"> 
+		<img th:src="@{'data:image/jpg;charset=utf-8;base64,'+${match.encoded}}"/>
+	</div>
+	<div id="paras">
+		<p th:text="${match.ethnicity} + ', ' + ${match.age} + ', ' + ${match.campus}" id="ethnicity"></p>
+		<p th:text="${match.program}" id="campus"></p>
+		<p th:text="${match.interestedIn}" id="interested-in"></p>
+		<p th:text="${match.bio}" id="bio"></p>
+	</div>
+</div>
+<div id="messages" class="align">
+	<h4>CONVERSATION</h4>
+	<div id="msgContainer">
+		<table>
+			<tr>
+				<th th:text="${match.firstName}"></th>
+				<th th:text="You"></th>
+			</tr>
+			<tr th:each="msg :${messages}">
+				<span th:if="${#lists.contains(mmi, msg.key)}">
+					<td><p id="matchmsg" th:text=${msg.value} style="background-color:#04417a">
+					</td>
+					<td></td>
+				</span>
+				<span th:if="${#lists.contains(umi, msg.key)}">
+					<td></td>
+					<td><p id="usermsg" th:text=${msg.value} style="color:#04417a"></td>
+				</span>
+			</tr>
+		</table>
+	</div>
+	<footer>
+		<form action="/sm/matches/messaging" method="POST">
+			<input type="hidden" name="username" th:value="${match.userName}">
+			<textarea name="message" maxLength="100" 
+				placeholder="Send Them a Message!"autofocus required></textarea>
+			<input type="submit" id="submit" value="SEND" >
+		</form>
+	</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Settings</title>
+<link rel="stylesheet" type="text/css" media="all"
+href="../static/css/meet.css" th:href="@{/css/meet.css}"/>
+<script src="../static/javascript/display.js" th:src="@{/javascript/display.js}"></script>
+</head>
+<body>
+<div id="h1-container">
+	<div id="h1-bg"></div>
+	<h1>SHERIDAN MEETS</h1>
+</div>
+
+<div id='img-bg'></div>
+<ul>
+	<div id="ul-bg"></div>
+	<li id="like-li"><p th:text="'Likes: ' + ${user.likes}"></p>
+		<ul id="like-list">
+			<li th:each="l : ${likes}" >
+				<p th:text="'+ ' + ${l.firstName} + ' Likes You'"></p>
+			</li>
+		</ul>
+	</li>
+	<li><div></div><a th:href="@{/sm/matches}" th:text="'Matches: ' + ${user.matches}"></a></li>
+	<li><a th:href="@{/sm/profile}">My Profile</a></li>
+	<li id="highlighted"><div></div><a th:href="@{/sm/settings}" th:text="Settings"></a></li>
+	<li><a th:href="@{/logout}">Logout</a></li>
+</ul>
+
+<div id="password-container">
+<button type="button" id="change-password-btn" 
+	onclick="display('change-password-form');" class="setting-btns">Change Password</button>
+<form id="change-password-form" th:action="@{/sm/settings/changepassword}" method="POST"
+		class="forms">
+	<input type="hidden" name="username" th:value="${user.userName}">
+	<p id="invalid">Incorrect Password</p>
+	<p id="invalid-newpass">Password Length Must Be Greater Than Zero</p>
+	<span>Current Password: </span><input type="password" name="password" id="pass1" required><br>
+	<span>New Password: </span><input type="password" name="newPassword" id="pass2" required><br>
+	<button type="button" th:onclick="getEncryptedPassword('/getEncryptedPassword/',
+	'[[${user.userName}]]')">CHANGE</button>
+</form>
+<button type="button" id="feedback-btn" 
+	onclick="display('feedback-form');" class="setting-btns">Provide Feedback</button>
+<form id="feedback-form" th:action="@{/sm/settings/feedback}" method="POST"
+		class="forms">
+		<input type="hidden" name="subject" th:value="${user.userName}">
+		<span>Did You Enjoy Using Sheridan Meets?</span><select name="enjoy">
+  					<option value="YES">YES</option>
+  					<option value="NO">NO</option>
+  					<option value="N/A">N/A</option>
+				</select><br><br>
+		<span>How Would You Rate Sheridan Meets On a Scale Of 1 to 10</span><br>
+		<span>(1 Being Horrendous, 10 Being Extraordinary)</span><select name="rate">
+  					<option value="1">1</option>
+  					<option value="2">2</option>
+  					<option value="3">3</option>
+  					<option value="4">4</option>
+  					<option value="5">5</option>
+  					<option value="6">6</option>
+  					<option value="7">7</option>
+  					<option value="8">8</option>
+  					<option value="9">9</option>
+  					<option value="10">10</option>
+		</select><br><br>
+		<span>Would You Recommend Sheridan Meets To a Friend?</span><select name="friend">
+  					<option value="YES">YES</option>
+  					<option value="NO">NO</option>
+  					<option value="N/A">N/A</option>
+		</select><br><br>
+		<span>Feel Free To Provide Us With More FeedBack</span><br>
+		<textarea maxLength="500" name="bio" style="resize: none;"></textarea>
+		<input type="submit" value="SUBMIT"><br>
+</form>
+<button type="button" id="delete-account-btn" 
+	onclick="display('delete-account-form');" class="setting-btns">Delete Account</button>
+<form id="delete-account-form" th:action="@{/sm/settings/deleteaccount}" method="POST"
+		class="forms">
+		<input type="hidden" name="username" th:value="${user.userName}">
+	<span>Are You Sure?</span><input type="submit" value="YES, DELETE"><br>
+</form>
+</div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Meet</title>
+<link rel="stylesheet" type="text/css" media="all"
+href="../static/css/meet.css" th:href="@{/css/meet.css}"/>
+</head>
+<body>
+<div id="h1-container">
+	<div id="h1-bg"></div>
+	<h1>SHERIDAN MEETS</h1>
+</div>
+
+<div id='img-bg'></div>
+<ul>
+	<div id="ul-bg"></div>
+	<li id="like-li"><p th:text="'Likes: ' + ${user.likes}"></p>
+		<ul id="like-list">
+			<li th:each="l : ${likes}" >
+				<p th:text="'+ ' + ${l.firstName} + ' Likes You'"></p>
+			</li>
+		</ul>
+	</li>
+	<li><a th:href="@{/sm/matches}" th:text="'Matches: ' + ${user.matches}"></a></li>
+	<li><a th:href="@{/sm/profile}">My Profile</a></li>
+	<li><a th:href="@{/sm/settings}" th:text="Settings"></a></li>
+	<li><a th:href="@{/logout}">Logout</a></li>
+</ul>
+<div th:id="left" th:style="${candidate.userName == null ? 'display:none' : 'display:block'}">
+	<p id="pleft">NO</p>
+	<form action="/sm/disapprove" method="GET">
+		<input type="hidden" name="username" th:value="${candidate.userName}" >
+		<input type="submit" onclick="this.disabled=true;this.form.submit();">
+	</form>
+</div>
+<div id="right" th:style="${candidate.userName == null ? 'display:none' : 'display:block'}">
+	<p id="pright">YES</p>
+	<form action="/sm/approve" method="GET">
+		<input type="hidden" name="username" th:value="${candidate.userName}">
+		<input type="submit" onclick="this.disabled=true;this.form.submit();">
+	</form>
+</div>
+<div id="container" th:style="${candidate.userName == null ? 'display:none' : 'display:block'}">
+	<p th:text="${candidate.firstName}" id="name-age"></p>
+	<div id="img"> 
+		<img th:src="@{'data:image/jpg;charset=utf-8;base64,'+${candidate.encoded}}"/>
+	</div>
+	<div id="paras">
+		<p th:text="${candidate.ethnicity} + ', ' + ${candidate.age} + ', ' + ${candidate.campus}" id="ethnicity"></p>
+		<p th:text="${candidate.program}" id="campus"></p>
+		<p th:text="${candidate.interestedIn}" id="interested-in"></p>
+		<p th:text="${candidate.bio}" id="bio"></p>
+	</div>
+</div>
+
+<div id="out" th:style="${candidate.userName == null ? 'display:block' : 'display:none'}">
+	<h3 id="topic">No More Users Available.</h3>
+</div>
+</body>
+</html>

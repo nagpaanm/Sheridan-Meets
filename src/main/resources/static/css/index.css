@@ -1,0 +1,191 @@
+*{
+	margin:0;
+	padding:0;
+}
+
+body{
+	text-align:center;
+}
+
+h1{
+	font-weight:200;
+	color:white;
+	padding:1% 0;
+}
+
+#img-bg{
+	top:0;
+	position:absolute;
+	width:100%;
+	height:100%;
+	background-image:url("../images/bg2.jpg");
+	background-position: center;
+	background-size: cover;
+	opacity:0.9;
+	z-index:-5;
+}
+
+#h2-container{
+	position:absolute;
+	bottom:20%;
+
+}
+
+#h2-container h2{
+	font-weight:200;
+	color:white;
+	text-transform:uppercase;
+	letter-spacing:3px;
+}
+
+#h2-bg{
+	position:absolute;
+	left:0;
+	width:100%;
+	height:100%;
+	background-color:white;
+	opacity:0.1;
+	z-index:-5;
+}
+
+#login{
+	position:absolute;
+	top:30%;
+	right:1%;
+	display:none;
+	width:400px;
+	margin:auto;
+	text-align:left;
+	padding: 30px 0px 30px 5px;
+	box-shadow:0 0 10px 0 black;
+	color:#022c54;
+}
+
+#login-bg{
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background-color:white;
+	z-index:-5;
+}
+
+#login header{
+	text-align:center;
+}
+
+#login > form input{
+	height:28px;
+	width:200px;
+	position:absolute;
+	right:5px;
+	font-size:1.25em;
+	color:#04417a;
+}
+
+#login > form label{
+	display:inline-block;
+	margin:5px 0;
+	font-size:1.5em;
+}
+
+#login > form input[type="submit"]{
+	width:125px;
+}
+
+#register{
+	display:none;
+	width:400px;
+	margin:auto;
+	position:absolute;
+	top:10%;
+	left:calc(50% - 200px);
+	box-shadow:0 0 10px 0 black;
+	text-align:left;
+	padding: 30px 0px 30px 5px;
+	color:#022c54;
+}
+
+#register-bg{
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background-color:white;
+	z-index:-5;
+}
+
+#register header{
+	text-align:center;
+}
+
+#register > form > input, select, button{
+	height:28px;
+	width:200px;
+	position:absolute;
+	right:5px;
+	font-size:1.25em;
+	color:#04417a;
+}
+
+#register > form > textarea{
+	width:98%;
+	height:50px;
+}
+
+#register > form > span{
+	display:inline-block;
+	margin:5px 0;
+	font-size:1.5em;
+}
+
+#register > form > button[type="button"]{
+	width:150px;
+}
+
+#register > form > input[type="file"]{
+	color:#022c54;;
+}
+
+
+#log{
+	position:absolute;
+	bottom:5%;
+	right:3%;
+}
+
+#reg{
+	position:absolute;
+	top:5%;
+	left:3%;
+}
+
+.button{
+	width:200px;
+	height:50px;
+	border:0px;
+	background-color:#ad2f5e;
+	color:white;
+	font-size:1.25em;
+	letter-spacing:3px;
+}
+
+.button:hover{
+	background-color:#822145;
+	transition: background-color 1s;
+}
+
+.button:not(hover){
+	background-color:#ad2f5e;
+	transition: background-color 1s;
+}
+
+.alert{
+	font-size:1.25em;
+}
+
+#invalid{
+	display:none;
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Admin</title>
+<link rel="stylesheet" type="text/css" media="all"
+href="../static/css/meet.css" th:href="@{/css/meet.css}"/>
+<script src="../static/javascript/display.js" th:src="@{/javascript/display.js}"></script>
+</head>
+<body id="admin-body">
+<div id='img-bg'></div>
+<div id="h1-container">
+	<div id="h1-bg"></div>
+	<h1>SHERIDAN MEETS - ADMINISTRATOR PANEL</h1>
+</div>
+<div id="password-container">
+<button type="button" class="setting-btns" onclick="display('generator');">GENERATE DUMMY USERS</button>
+<form th:action="@{/admin/generatedummyusers}" method="GET" id="generator">
+	Amount: <input type="number" min="0" max="60" name="amount" value="50" autofocus required>
+	<input type="submit" value="GENERATE">
+</form>
+<button type="button" class="setting-btns" onclick="display('admin-table-container');">SHOW USERS</button>
+<div id="admin-table-container">
+<h3 th:text="'No Users Registered'" th:if="${#lists.size(users)} == 0"></h3>
+<table id="admin-table" th:if="${#lists.size(users)} > 0">
+	<tr id="table-header">
+		<th></th>
+		<th>Username</th>
+		<th>First Name</th>
+		<th>Bio</th>
+		<th>Likes</th>
+		<th>Matches</th>
+	</tr>
+	<tr th:each="user : ${users}">
+		<td id="td-img"><img th:src="@{'data:image/jpg;charset=utf-8;base64,'+${user.encoded}}" class="imgs"></td>
+		<td th:text="${user.userName}">
+		<td th:text="${user.firstName}">
+		<td id ="td-bio" th:text="${user.bio}">
+		<td th:text="${user.likes}">
+		<td th:text="${user.matches}">
+		<td><a th:href="@{/admin/delete/{id}(id=${user.id})}">DELETE</a></td>
+	</tr>
+</table>
+</div>
+<button type="button" class="setting-btns" onclick="display('stats');">SHOW STATISTICS</button>
+<div id="stats">
+	<h3 id="admin-h3" th:text="'Registered Accounts: ' + ${#lists.size(users)}"></h3>
+	<h3 th:text="'Total Number Of Likes: ' + ${likes}"></h3>
+	<h3 th:text="'Total Number Of Matches: ' + ${matches}"></h3>
+	<h3 th:text="'Total Number Of Males: ' + ${males}"></h3>
+	<h3 th:text="'Total Number Of Females: ' + ${females}"></h3>
+	<h3 th:text="'Total Number Of Other Gender(s): ' + ${others}"></h3>
+	<h3 th:text="'Total Number Of People Looking for L-T-R: ' + ${ltr}"></h3>
+	<h3 th:text="'Total Number Of People Looking for S-T-R: ' + ${str}"></h3>
+	<h3 th:text="'Total Number Of People Looking for Hookups: ' + ${hookups}"></h3>
+	<h3 th:text="'Total Number Of People Looking for Friends: ' + ${friends}"></h3>
+</div>
+<button type="button" class="setting-btns" onclick="display('delete-all-accounts');">DELETE ALL ACCOUNTS</button>
+<form action="/admin/deleteallaccounts" method="GET" id="delete-all-accounts">
+	Are you Sure? <input type="submit" value="YES, DELETE" id="delete-all">
+</form>
+<form action="/logout" method="GET">
+	<input type="submit" value="LOGOUT" class="setting-btns">
+</form>
+</div>
+</body>
+</html>

@@ -1,0 +1,270 @@
+@charset "ISO-8859-1";
+
+*{
+	margin:0;
+	padding:0;
+}
+
+body{
+	text-align:center;
+	background-color:black;
+}
+
+#h1-container{
+	position:relative;
+}
+
+#h1-bg{
+	position:absolute;
+	width:100%;
+	height:100%;
+	background-color:white;
+	opacity:0.1;
+	z-index:-4;	
+}
+
+#h1-container h1{
+	font-weight:200;
+	color:white;
+	padding:1% 0;
+}
+
+
+#img-bg{
+	top:0;
+	position:absolute;
+	width:100%;
+	height:100%;
+	background-image:url("../images/bg3.jpg");
+	filter: blur(8px);
+	background-position: center;
+	background-size: cover;
+	opacity:0.75;
+	z-index:-5;
+}
+
+ul{
+	list-style-type:none;
+	position:relative;
+}
+
+#ul-bg{
+	position:absolute;
+	width:100%;
+	height:100%;
+	background-color:white;
+	z-index:-5;
+	opacity:0.11;
+}
+
+ul > li{
+	display:inline-block;
+	width:15%;
+	padding:10px 0;
+	color:white;
+	position:relative;
+	font-size:1.5em;
+	letter-spacing:3px;
+	position:relative;
+}
+
+ul a{
+	text-decoration:none;
+	color:white;
+	display:block;
+	width:100%;
+	height:100%;
+}
+
+ul  #like-list{
+	display:none;
+	position:absolute;
+	left:0;
+	top:100%;
+	width:100%;
+	max-height:100px;
+	background-color:rgba(255,255,255,1);
+	text-align:center;
+	overflow-y:auto;
+	z-index:10;
+}
+
+#like-list li{
+	width:100%;
+	font-size:0.7em;
+	color:#04417a;
+	border-bottom:1px solid #04417a;
+}
+
+#like-li:hover #like-list{
+	display:block;
+}
+
+#highlighted > div{
+	position:absolute;
+	width:100%;
+	top:0;
+	left:0;
+	height:100%;
+	background-color:#022c54;
+	opacity:0.75;
+	z-index:-5;
+}
+
+#container{
+	width:400px;
+	height:500px;
+	margin-right:-1%;
+	position:relative;
+	background-color:white;
+	overflow:hidden;
+	border-radius:10px;
+	box-shadow:0 0 20px 0 black;
+}
+
+
+#img{
+	height:300px;
+	width:85%;
+	margin:auto;
+	overflow:hidden;
+	background-color:white;
+	position:relative;
+}
+
+#img img{
+	width:100%;
+}
+
+#container #paras{
+	overflow:auto;
+	height:170px;
+}
+
+#container p{
+	font-weight:225;
+	font-size:1.25em;
+	letter-spacing:2px;
+	line-height:25px;
+	color:#022c54;;
+	padding:5px 25px;
+}
+
+#messages{
+	height:500px;
+	border:2px solid background-color:#022c54;;
+	width:700px;
+	position:relative;
+	background-color:white;
+}
+
+.align{
+	display:inline-block;
+	margin-top:1%;
+}
+
+#messages h4{
+	position:absolute;
+	width:100%;
+	line-height:40px;
+	color:white;
+	background-color:#022c54;
+	z-index:5;
+}
+
+#messages > footer{
+	background-color:#022c54;
+	position:absolute;
+	bottom:0;
+	height:100px;
+	width:100%;
+}
+
+#messages footer textarea{
+	resize:none;
+	width:400px;
+	height:35px;
+	position:absolute;
+	left:5%;
+	top:25%;
+	font-size:2em;
+}
+
+#submit{
+	position:absolute;
+	top:15%;
+	right:5%;
+	width:200px;
+	height:50px;
+	border:0px;
+	background-color:#ad2f5e;
+	color:white;
+	font-size:1.25em;
+	letter-spacing:3px;
+}
+
+#msgContainer{
+	position:absolute;
+	top:25px;
+	width:100%;
+	height:300px;
+	overflow:auto;
+}
+
+#messages table{
+	width:90%;
+	height:100%;
+	margin:30px auto 0 auto;
+	text-align:center;
+	table-layout:fixed;
+	font-size:1.25em;
+}
+
+#messages table th{
+	word-wrap: break-word;
+	max-width: 320px;
+	font-weight:100;
+	font-size:1.25em;
+	color:#022c54;
+	width:320px;
+}
+
+#messages table td{
+	word-wrap: break-word;
+	max-width: 305px;
+	width:320px;
+	padding: 5px 0;
+}
+
+#messages #matchmsg{
+	color:white;
+	border-radius:5px;
+	padding:10px;
+}
+
+#messages #usermsg{
+	background-color:#e8e8e8;
+	border-radius:5px;
+	padding:10px;
+}
+
+#container #name-age{
+	font-size:2em;
+}
+
+#container #ethnicity{
+	text-align:left;
+}
+
+#container #campus{
+	text-align:right;
+}
+
+#container #interested-in{
+	text-align:left;
+}
+
+#container #bio{
+	text-align:right;
+	font-weight:bold;
+}
